@@ -1,53 +1,50 @@
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Toaster from "./components/ui/Toaster";
+
 import Homepage from "./pages/Hompage";
-import Cartpage from './pages/Cartpage'
-import CatagoryPage from './pages/CatagoryPage'
-import Wishlistpage from './pages/Wishlistpage'
-import Productspage from './pages/Productspage'
-import Contectpage from './pages/Contectpage'
-import Profilepage from './pages/ProfilePage'
-import Productpage from './pages/Productpage'
-import Otp from "./components/ComponentsItems/OtpVarification";
-import Authenticationpage from "./pages/Authpage"
-import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
-import { useContext} from "react";
-import Alert from "./components/Alert";
-import Contexts from "./context/Context";
-import Configration from "./pages/Configrationpage"
-import Csoon from './pages/ComingsoonPage'
+import Productspage from "./pages/Productspage";
+import Productpage from "./pages/Productpage";
+import CatagoryPage from "./pages/CatagoryPage";
+import Dealspage from "./pages/Dealspage";
+import Cartpage from "./pages/Cartpage";
+import Checkoutpage from "./pages/Checkoutpage";
+import Wishlistpage from "./pages/Wishlistpage";
+import Orderspage from "./pages/Orderspage";
+import ProfilePage from "./pages/ProfilePage";
+import Contectpage from "./pages/Contectpage";
+import Authpage from "./pages/Authpage";
+import NotFoundpage from "./pages/NotFoundpage";
 
 function App() {
-
-  const Context=useContext(Contexts)
-  const {alert}=Context
-
   return (
-    <div className="w-screen h-screen bg-slate-200 grid place-items-center relative">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path='/auth' element={<Authenticationpage />} />
-          <Route path='/otp' element={<Otp />} />
-          <Route path='/configration' element={<Configration />} />
-          <Route path="/cart" element={<Cartpage />} />
-          <Route path="/categorypage" element={<CatagoryPage />} />
-          <Route path="/contect" element={<Contectpage />} />
-          <Route path="/profile" element={<Profilepage />} />
-          <Route path="/wishlist" element={<Wishlistpage />} />
-          <Route path="/products" element={<Productspage />} />
-          <Route path="/product" element={<Productpage />} />
-          <Route path="/comesoon" element={<Csoon />} />
-        </Routes>
-      </Router>
-      {alert.showalert && (
-          <Alert
-            msg={alert.msg}
-            status={alert.status}
-            showalert={alert.showalert}
-            type={alert.type}
-          />
-        )}
-    </div>
+    <Router>
+      <Routes>
+        {/* Auth sits outside the shell — it owns the full viewport. */}
+        <Route path="/auth" element={<Authpage />} />
 
+        <Route element={<Layout />}>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/products" element={<Productspage />} />
+          <Route path="/product/:id" element={<Productpage />} />
+          <Route path="/category/:slug" element={<CatagoryPage />} />
+          <Route path="/deals" element={<Dealspage />} />
+          <Route path="/cart" element={<Cartpage />} />
+          <Route path="/checkout" element={<Checkoutpage />} />
+          <Route path="/wishlist" element={<Wishlistpage />} />
+          <Route path="/orders" element={<Orderspage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/contact" element={<Contectpage />} />
+
+          {/* Legacy paths from the earlier build */}
+          <Route path="/contect" element={<Navigate to="/contact" replace />} />
+          <Route path="/categorypage" element={<Navigate to="/products" replace />} />
+
+          <Route path="*" element={<NotFoundpage />} />
+        </Route>
+      </Routes>
+      <Toaster />
+    </Router>
   );
 }
 

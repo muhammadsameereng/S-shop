@@ -1,69 +1,96 @@
 # S-Shop
 
-S-Shop is a full-stack e-commerce application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). This project aims to provide a seamless shopping experience with features such as authentication, a shopping cart, wishlist functionality, and more. Whether you're a customer looking for products or an admin managing the store, S-Shop has got you covered.
+S-Shop is a modern storefront built with React, Redux Toolkit, Tailwind CSS and Framer Motion.
+It covers the full shopping journey — browse, search, filter, wishlist, cart and a three-step
+checkout — with a design system that works in both light and dark themes.
 
-## Features
+The catalogue, orders and account details ship with the app, so it runs immediately with no
+services to configure.
 
-### Authentication
-- User registration and login with secure authentication.
-- Protected routes ensuring only authenticated users can access certain parts of the application.
-- Password hashing for enhanced security.
+## Highlights
 
-### Shopping Cart
-- Users can add products to their cart, update quantities, and remove items.
-- Seamless integration with the checkout process.
-- Real-time updates to reflect changes in the cart.
+### Storefront
+- Animated hero carousel with progress indicators, autoplay and pause-on-hover
+- Category landing pages, a flash-deals page with a live countdown, and a 404 that helps you back
+- Product illustrations generated at build time, so pages render instantly and never show a broken image
 
-### Wishlist
-- Users can add products to their wishlist for future reference.
-- Easy management of wishlist items with options to remove or move to cart.
+### Discovery
+- Instant search with product suggestions, reachable anywhere via `⌘K` / `Ctrl+K`
+- Faceted filtering by category, brand, price, rating and availability
+- Six sort modes, grid/list layouts, removable filter chips and shareable URLs — every filter lives in the query string
+- Skeleton loading states and progressive "load more" pagination
 
-### Product Management
-- Admins can add, update, and delete products from the inventory.
-- Detailed product information including images, descriptions, and pricing.
+### Product detail
+- Multi-shot gallery with thumbnail navigation
+- Colour and size variants, quantity stepper, and an add-to-cart confirmation state
+- Tabbed description, specification table and a review breakdown with rating distribution
+- Related products from the same category
 
-### Order Management
-- Users can view their order history and track the status of their orders.
-- Admins can manage orders, update statuses, and view order details.
+### Cart and checkout
+- Slide-over cart drawer with a free-delivery progress meter
+- Quantity editing, save-for-later, promo codes (`SSHOP10`, `WELCOME20`, `FREESHIP`) and delivery-speed selection
+- Three-step checkout — delivery, payment, review — with an animated order confirmation
+- Cart and wishlist persist across reloads via local storage
 
-### Search and Filtering
-- Powerful search functionality allowing users to find products quickly.
-- Filters to narrow down search results based on various criteria such as price range, category, etc.
+### Account
+- Sign in / sign up with password visibility toggle and a one-tap credential fill
+- Profile with editable details, avatar upload, saved addresses and payment cards
+- Order history with a per-order tracking timeline and status filters
 
-### Responsive Design
-- S-Shop is built with responsiveness in mind, ensuring a seamless experience across devices of all sizes.
+### Experience details
+- Light and dark themes with the preference stored and applied before first paint
+- Toast notification system, page transitions, scroll-reveal sections and a back-to-top control
+- Responsive from 320px up, with a mobile navigation drawer and a bottom-sheet filter panel
+- Keyboard accessible controls, ARIA labelling and visible focus rings throughout
 
-## Getting Started
+## Tech stack
 
-To get started with S-Shop on your local machine, follow these steps:
+| Area | Choice |
+| --- | --- |
+| Framework | React 18 + Vite |
+| State | Redux Toolkit (products, cart, wishlist, user) |
+| Styling | Tailwind CSS with a custom token layer |
+| Motion | Framer Motion |
+| Routing | React Router v6 |
+| Icons | React Icons |
 
-1. Clone the repository: `git clone https://github.com/your-username/s-shop.git`
-2. Navigate to the project directory: `cd s-shop`
-3. Install dependencies:
-   ```
-   cd client
-   npm install
-   cd ..
-   cd server
-   npm install
-   ```
-4. Set up environment variables:
-   - Create a `.env` file in the server directory and add necessary environment variables such as database connection URI, JWT secret, etc.
-5. Seed the database (optional): If you want to populate the database with sample data, run `npm run seed` in the server directory.
-6. Start the development server:
-   ```
-   cd ..
-   npm run dev
-   ```
+## Getting started
 
-## Contributing
+```bash
+npm install
+npm run dev      # start the dev server
+npm run build    # production build
+npm run preview  # preview the production build
+npm run lint     # lint the source
+```
 
-Contributions are welcome! If you have any ideas, bug fixes, or improvements, feel free to open an issue or submit a pull request.
+## Project structure
+
+```
+src/
+├── components/
+│   ├── cart/       cart drawer
+│   ├── home/       hero and landing sections
+│   ├── layout/     navbar, footer, page shell
+│   ├── product/    product card, quick view, filters
+│   └── ui/         shared primitives (rating, toasts, image, skeletons)
+├── context/        theme and notification providers
+├── data/           catalogue and account data
+├── lib/            formatting, storage and image-generation helpers
+├── pages/          route-level screens
+└── redux/          store and feature slices
+```
+
+## Signing in
+
+Use the **Use demo credentials** button on the sign-in screen, or enter any email and password —
+the session is created locally and persists until you sign out.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT
 
 ## Acknowledgements
 
-Special thanks to the creators and maintainers of the MERN stack, as well as the numerous open-source libraries and frameworks that made this project possible.
+Built by Muhammad Sameer. Thanks to the maintainers of React, Vite, Tailwind CSS,
+Redux Toolkit and Framer Motion.

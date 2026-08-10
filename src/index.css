@@ -2,6 +2,145 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar{
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+  }
+  .dark body {
+    @apply bg-ink-950 text-ink-100;
+  }
+
+  ::selection {
+    @apply bg-brand-500/25;
+  }
+
+  /* Slim, themed scrollbars instead of hiding them entirely. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(133, 144, 170, 0.45) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(133, 144, 170, 0.4);
+    border-radius: 999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(133, 144, 170, 0.7);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+  }
+  .dark :focus-visible {
+    @apply ring-offset-ink-950;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10;
+  }
+
+  .surface {
+    @apply bg-white dark:bg-ink-900 border border-ink-100 dark:border-white/10;
+  }
+
+  .glass {
+    @apply bg-white/80 dark:bg-ink-950/70 backdrop-blur-xl;
+  }
+
+  .muted {
+    @apply text-ink-500 dark:text-ink-400;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold
+           transition-all duration-200 active:scale-[.97] disabled:opacity-50
+           disabled:pointer-events-none whitespace-nowrap;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-600 shadow-soft hover:shadow-glow;
+  }
+  .btn-dark {
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 dark:bg-white dark:text-ink-900 dark:hover:bg-ink-100;
+  }
+  .btn-ghost {
+    @apply btn text-ink-700 dark:text-ink-200 hover:bg-ink-100 dark:hover:bg-white/10;
+  }
+  .btn-outline {
+    @apply btn border border-ink-200 dark:border-white/15 text-ink-800 dark:text-ink-100
+           hover:border-brand-400 hover:text-brand-600 dark:hover:text-brand-300;
+  }
+  .btn-sm {
+    @apply h-9 px-4 text-sm;
+  }
+  .btn-md {
+    @apply h-11 px-5 text-sm;
+  }
+  .btn-lg {
+    @apply h-12 px-7 text-[15px];
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-ink-200 dark:border-white/10 bg-white dark:bg-ink-900
+           px-4 py-3 text-sm placeholder:text-ink-400 outline-none transition
+           focus:border-brand-400 focus:ring-4 focus:ring-brand-500/10;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-200 dark:border-white/10
+           px-3 py-1.5 text-xs font-semibold transition-colors;
+  }
+
+  .card {
+    @apply surface rounded-2xl shadow-soft;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-ink-100 dark:bg-white/5;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full animate-shimmer
+           bg-gradient-to-r from-transparent via-white/60 to-transparent dark:via-white/10;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0
+           after:bg-current after:transition-all hover:after:w-full;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, #000 80%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 80%, transparent 100%);
+  }
 }
